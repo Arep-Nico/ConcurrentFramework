@@ -6,7 +6,13 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+
+import escuelaing.arep.concurrentFramework.framework.models.User;
+import escuelaing.arep.concurrentFramework.framework.services.ParserJson;
 
 public class HandlerRequest implements Runnable {
 
@@ -48,7 +54,7 @@ public class HandlerRequest implements Runnable {
       if (fileName.equals("getDB "))
          HandlerDB(out);
       else if (fileName.startsWith("api"))
-         HanderApi(out, fileName.substring(fileName.indexOf("/"), fileName.length()-1));
+         HanderApi(out, fileName.substring(fileName.indexOf("/"), fileName.length() - 1));
       else if (!fileName.equals("/"))
          HandlerFiles(fileName, out, outbs, ops);
       out.flush();
@@ -146,11 +152,14 @@ public class HandlerRequest implements Runnable {
     * @param out
     */
    private void HandlerDB(PrintWriter out) {
-      String res = DataBase.getData();
-      String outString = "HTTP/1.1 200 Ok\r\n" + "Content-type: " + "text/html" + "\r\n"
-            + "Server: Java HTTP Server\r\n" + "Date: " + new Date() + "\r\n" + "\r\n" + "<!DOCTYPE html>" + "<html>"
-            + "<head>" + "<meta charset=\"UTF-8\">" + "<title>DataBase</title>\n" + "</head>" + "<body>" + "<center>"
-            + "<h1>Data DataBase</h1></br>" + res + "</center>" + "</body>" + "</html>";
+      DataBase.connection();
+      List<User> res = DataBase.getData("select * from user");
+      String outString = "HTTP/1.1 200 Ok\r\n" + "Content-type: " + "application/json" + "\r\n";
+      try {
+         outString += ParserJson.toJson(res);
+      } catch (JsonProcessingException e) {
+         e.printStackTrace();
+      }
       out.println(outString);
    }
 
@@ -188,16 +197,5 @@ public class HandlerRequest implements Runnable {
             "</body>" + 
             "</html>";
       out.println(outString);
-   }
-
-   /**
-    * retorna un puerto disponible 
-    * @return
-    */
-   private int getPort() {
-      if (System.getenv("PORT") != null) {
-         return Integer.parseInt(System.getenv("PORT"));
-      }
-      return 5000; // returns default port if heroku-port isn't set (i.e. on localhost)
    }
 }
