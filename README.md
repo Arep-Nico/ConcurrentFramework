@@ -1,6 +1,13 @@
-# Laboratorio Concurrent Framework
+# Laboratorio Http Server
 
-Este laboratorio consiste en desarrollar un servidor http con java 
+Este laboratorio consiste en desarrollar un servidor http concurrente con java 
+
+[![Heroku](https://heroku-badge.herokuapp.com/?app=calm-eyrie-03653)](https://calm-eyrie-03653.herokuapp.com)
+[![CircleCI](https://circleci.com/gh/Arep-Nico/ConcurrentFramework/tree/master.svg?style=svg)](https://circleci.com/gh/Arep-Nico/ConcurrentFramework/tree/master)
+[![Maven Central](https://img.shields.io/maven-central/v/org.apache.maven.plugins/maven-compiler-plugin/3.8.0)](https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-compiler-plugin/3.8.0)
+[![Maven Central](https://img.shields.io/maven-central/v/org.apache.maven.plugins/maven-dependency-plugin/3.0.1)](https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-dependency-plugin/3.0.1)
+[![Maven Central](https://img.shields.io/maven-central/v/org.apache.maven.plugins/maven-javadoc-plugin)](https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-javadoc-plugin)
+![GitHub](https://img.shields.io/github/license/Arep-Nico/ConcurrentFramework)
 
 ### Prerequisitos
 
@@ -8,7 +15,20 @@ Se requiere maven y Java version 8 como minimo.
 
 ## Diseño
 
-La documentacion del Api de **Concurrent Framework** esta a continuacion [aqui](documents/Laboratorio_1_Arep.pdf).
+La documentacion del Api de **Http Server** esta a continuacion [aqui](documents/Laboratorio_4_Arep.pdf).
+
+End Points
+- /\<Nombre de archivos>
+- /getDB
+- /api/\<server path>/\<methot path>
+
+## Demo
+````
+ - https://calm-eyrie-03653.herokuapp.com/index.html
+ - https://calm-eyrie-03653.herokuapp.com/getDB
+ - https://calm-eyrie-03653.herokuapp.com/api/hello/greeting
+
+````
 
 ## Running
  Para empaquetar el proyecto de Java 
@@ -18,7 +38,7 @@ La documentacion del Api de **Concurrent Framework** esta a continuacion [aqui](
  > mvn test 
  
  Para ejecutar el Api 
- > mvn exec:java -D "com.escuelaing.arep.clientServer.HttpServer"
+ > mvn exec:java -D "escuelaing.arep.concurrentFramework.App"
  
  Para generar la documentacion de Java
  > mvn javadoc:javadoc
@@ -32,7 +52,7 @@ La documentacion del Api de **Concurrent Framework** esta a continuacion [aqui](
 
 ## Versionamiento
 
-Para ver las versiones disponible, mire [realese version](https://github.com/Arep-Nico/ClientServer/releases).
+Para ver las versiones disponible, mire [realese version](https://github.com/Arep-Nico/ConcurrentFramework/releases).
 
 ## Autor
 
